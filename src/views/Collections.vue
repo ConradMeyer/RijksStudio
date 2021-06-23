@@ -34,6 +34,7 @@ h1 {
   color: white;
   background-color: rgb(182, 50, 50);
   padding: 20px;
+  border-bottom: 1px solid white;
 }
 div.container1 {
   display: flex;

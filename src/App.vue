@@ -7,6 +7,10 @@
 </template>
 
 <script>
+import Vue from "vue";
+import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 export default {

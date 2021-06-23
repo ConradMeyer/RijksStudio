@@ -1,6 +1,5 @@
 <template>
   <div class="favorites">
-
     <h1>FAVORITES PAINTINGS</h1>
 
     <div class="no-res" v-if="this.favorites.length === 0">
@@ -21,10 +20,9 @@
           </h3>
           <p class="long-title">{{ item.artObject.longTitle }}</p>
         </router-link>
-        <button @click="deleteFav(item.artObject.id)">DELETE</button>
+        <button @click="deleteFav(item.artObject.id)">REMOVE</button>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -54,6 +52,7 @@ h1 {
   color: white;
   background-color: rgb(182, 50, 50);
   padding: 20px;
+  border-bottom: 1px solid white;
 }
 div.no-res {
   text-align: center;

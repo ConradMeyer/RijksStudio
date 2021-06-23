@@ -33,6 +33,8 @@ div.footer {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  border-top: 1px solid white;
+  line-height: 1.5;
 }
 button {
   padding: 15px 20px;
