@@ -14,14 +14,19 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "Collections",
   computed: {
     ...mapState(["artistas"]),
   },
-  methods: {},
+  methods: {
+    ...mapActions(['getArtist'])
+  },
+  created() {
+    this.getArtist()
+  }
 };
 </script>
 

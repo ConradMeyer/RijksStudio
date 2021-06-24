@@ -7,8 +7,8 @@
       <img src="../assets/spinner2.gif" id="gif" />
     </div>
     <div class="container">
-      <div class="obra" v-for="(item, index) in artist.artObjects" :key="index">
-        <div v-if="item.hasImage">
+      <div v-for="(item, index) in artist.artObjects" :key="index">
+        <div class="obra" v-if="item.hasImage">
           <img :src="item.webImage.url" alt="" />
           <router-link :to="`/paint/${item.objectNumber}`">
             <h4>
@@ -42,15 +42,13 @@ export default {
           `https://www.rijksmuseum.nl/api/nl/collection?key=2pgrS0Oq&involvedMaker=${this.$route.params.id}`
         );
         const data = await res.json();
-        console.log(data);
         this.artist = data;
-      }, 3000);
+      }, 2000);
     },
     resume() {
-      let res = this.artistas.find(
+      this.data = this.artistas.find(
         (item) => item.name === this.$route.params.id
-      );
-      this.data = res.resume;
+      ).resume;
     },
   },
   created() {

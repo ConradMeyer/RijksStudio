@@ -1,7 +1,7 @@
 <template>
   <div class="favorites">
     <h1>FAVORITES PAINTINGS</h1>
-
+    <Search @handleSearch="handleSearch" />
     <div class="no-res" v-if="this.favorites.length === 0">
       <h3>
         You don't have any favorites saved yet. 😍 <br />
@@ -12,11 +12,11 @@
     </div>
 
     <div v-else class="result">
-      <div class="obras" v-for="(item, index) in this.favorites" :key="index">
+      <div class="obras" v-for="(item, index) in this.filter" :key="index">
         <router-link :to="`/paint/${item.artObjectPage.objectNumber}`">
           <img :src="item.artObject.webImage.url" alt="" />
           <h3>
-            {{ item.artObject.label.title }}
+            {{ item.artObject.title }}
           </h3>
           <p class="long-title">{{ item.artObject.longTitle }}</p>
         </router-link>
@@ -28,16 +28,35 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import Search from "../components/Search.vue";
+
 export default {
   name: "Favorites",
+  data() {
+    return {
+      favs: [],
+      filter: []
+    };
+  },
+  components: {
+    Search,
+  },
   computed: {
     ...mapState(["favorites"]),
   },
   methods: {
     ...mapActions(["getFav", "deleteFav"]),
+    setFavs() {
+      this.favs = this.favorites;
+      this.filter = this.favorites
+    },
+    handleSearch(data) {
+      this.filter = this.favs.filter(el => el.artObject.title.toLowerCase().includes(data) || el.artObject.principalMaker.toLowerCase().includes(data))
+    },
   },
   created() {
     this.getFav();
+    this.setFavs();
   },
 };
 </script>
