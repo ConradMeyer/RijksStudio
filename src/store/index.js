@@ -15,9 +15,7 @@ export default new Vuex.Store({
       localStorage.setItem('Favorites', JSON.stringify(state.favorites))
     },
     deleteFav(state, payload) {
-      console.log(payload);
       state.favorites = state.favorites.filter(item => item.artObject.id !== payload)
-      console.log(state.favorites);
       localStorage.setItem('Favorites', JSON.stringify(state.favorites))
     },
     getFav(state, payload) {
@@ -25,7 +23,6 @@ export default new Vuex.Store({
     },
     getArtist(state, payload) {
       state.artistas = payload
-      console.log(state.artistas)
     }
   },
   actions: {

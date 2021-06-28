@@ -4,7 +4,7 @@
     <div id="nav">
       <router-link to="/">HOME</router-link> |
       <router-link to="/collections">COLLECTIONS</router-link> |
-      <router-link to="/favorites">FAVORITES</router-link> 
+      <router-link data-testid="test-fav" to="/favorites">FAVORITES</router-link> 
     </div>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <div class="favorites">
-    <h1>FAVORITES PAINTINGS</h1>
-    <Search @handleSearch="handleSearch" />
+    <h1 data-testid="test-favorites">FAVORITES PAINTINGS</h1>
+    <Search v-if="favs.length > 0" @handleSearch="handleSearch" />
     <div class="no-res" v-if="this.favorites.length === 0">
       <h3>
         You don't have any favorites saved yet. 😍 <br />
@@ -20,7 +20,7 @@
           </h3>
           <p class="long-title">{{ item.artObject.longTitle }}</p>
         </router-link>
-        <button @click="deleteFav(item.artObject.id)">REMOVE</button>
+        <button @click="deleteFavorite(item.artObject.id)">REMOVE</button>
       </div>
     </div>
   </div>
@@ -42,7 +42,7 @@ export default {
     Search,
   },
   computed: {
-    ...mapState(["favorites"]),
+    ...mapState(["favorites", "filter"]),
   },
   methods: {
     ...mapActions(["getFav", "deleteFav"]),
@@ -53,6 +53,10 @@ export default {
     handleSearch(data) {
       this.filter = this.favs.filter(el => el.artObject.title.toLowerCase().includes(data) || el.artObject.principalMaker.toLowerCase().includes(data))
     },
+    async deleteFavorite(id) {
+      await this.deleteFav(id)
+      this.setFavs()
+    }
   },
   created() {
     this.getFav();

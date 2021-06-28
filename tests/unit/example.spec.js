@@ -1,33 +1,37 @@
-import { shallowMount } from '@vue/test-utils'
-import Vue from 'vue'
-import Test from '../../src/components/Test.vue'
+import { render, screen, fireEvent, waitFor } from '@testing-library/vue'
+import '@testing-library/jest-dom'
+import Home from '../../src/views/Home.vue'
+import Collections from '../../src/views/Collections.vue'
+import Header from '../../src/components/Header'
 
-// Aquí hay algunas pruebas de Jasmine 2.0, aunque puede
-// usar cualquier librería que prefiera
-describe('MyComponent', () => {
-  // Inspeccionar las opciones de componentes en bruto
-  it('tiene un hook creado', () => {
-    expect(typeof Test.created).toBe('function')
+describe('Navigation on website', () => {
+  it('Renders the home page with the title', () => {
+    render(Home)
+
+    expect(screen.getByText(/welcome/i))
   })
 
-  // Evaluar los resultados de las funciones env
-  // las opciones de componentes en bruto
-  it('establece los datos correctos por defecto', () => {
-    expect(typeof Test.data).toBe('function')
-    const defaultData = Test.data()
-    expect(defaultData.message).toBe('Hola!')
+  it('The button works correctly', async () => {
+    render(Home)
+
+    const $button = screen.getByRole('button', { name: /collections/i })
+
+    await fireEvent.click($button)
+
+    waitFor(() =>
+      expect(screen.getByTestId("title-collection"))
+    )
   })
 
-  // Inspeccionar la instancia del componente en el montaje
-  it('establece correctamente el mensaje cuando se crea', () => {
-    const vm = new Vue(Test).$mount()
-    expect(vm.message).toBe('Chau!')
-  })
+  it('Nav bar at header component', async () => {
+    render(Header)
 
-  // Montar una instancia e inspeccionar la salida del render
-  it('emite el mensaje correcto', () => {
-    const Constructor = Vue.extend(Test)
-    const vm = new Constructor().$mount()
-    expect(vm.$el.textContent).toBe('Chau!')
+    const $favs = screen.getByTestId("test-fav")
+
+    await fireEvent.click($favs)
+
+    waitFor(() =>
+      expect(screen.getByTestId("test-favorites"))
+    )
   })
 })

@@ -43,7 +43,7 @@ export default {
         );
         const data = await res.json();
         this.artist = data;
-      }, 2000);
+      }, 1000);
     },
     resume() {
       this.data = this.artistas.find(

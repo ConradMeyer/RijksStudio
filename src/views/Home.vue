@@ -18,7 +18,7 @@
       <h3>Now in Rijksstudio</h3>
       <h4>
         Browse 722,509 works of art and 597,416 Rijksstudios > Visit our
-        <router-link to="/collections">COLLECTIONS</router-link>
+        <router-link role="button" to="/collections">COLLECTIONS</router-link>
       </h4>
       <div class="images">
         <img src="../assets/img1.png" alt="" />
